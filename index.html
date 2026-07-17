@@ -6,15 +6,16 @@
     <title>Iglesia Jesús Te Ama - Plataforma Oficial</title>
     <style>
         :root {
-            --bg-main: #0f172a;
-            --bg-surface: #1e293b;
-            --bg-card: #273549;
+            --bg-main: #0b111e;
+            --bg-surface: rgba(30, 41, 59, 0.7);
+            --bg-card: rgba(39, 53, 73, 0.5);
             --primary: #38bdf8;
-            --primary-hover: #0284c7;
+            --primary-glow: rgba(56, 189, 248, 0.3);
             --accent: #f59e0b;
-            --text-main: #f8fafc;
+            --accent-glow: rgba(245, 158, 11, 0.3);
+            --text-main: #f1f5f9;
             --text-muted: #94a3b8;
-            --success: #10b981;
+            --border-glow: rgba(255, 255, 255, 0.08);
         }
 
         * {
@@ -23,243 +24,380 @@
             padding: 0;
         }
 
+        /* Fondo Animado con Ondas y Gradientes Complejos */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-main);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(245, 158, 11, 0.08) 0px, transparent 50%),
+                radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.9) 0px, #070a12 100%);
+            background-attachment: fixed;
             color: var(--text-main);
             line-height: 1.6;
-            padding-bottom: 60px;
+            padding-bottom: 40px;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Barra de Navegación Profesional */
+        /* Ondas Decorativas en el Fondo */
+        body::before, body::after {
+            content: "";
+            position: fixed;
+            width: 300vw;
+            height: 300vw;
+            top: -250vw;
+            left: -100vw;
+            border-radius: 45%;
+            background: linear-gradient(rgba(56, 189, 248, 0.03), rgba(0, 0, 0, 0));
+            animation: wave 40s infinite linear;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::after {
+            top: -248vw;
+            left: -95vw;
+            border-radius: 43%;
+            background: linear-gradient(rgba(245, 158, 11, 0.02), rgba(0, 0, 0, 0));
+            animation: wave 30s infinite linear;
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Barra de Navegación de Alta Gama (Efecto Espejo / Glassmorphism) */
         .navbar {
-            background-color: var(--bg-surface);
-            padding: 15px 20px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 18px 30px;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--border-glow);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .navbar .brand {
-            font-size: 1.4rem;
-            font-weight: bold;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 0 15px var(--primary-glow);
+            letter-spacing: 0.5px;
+        }
+
+        .navbar .brand span {
             color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 25px;
         }
 
         .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
             font-size: 0.95rem;
-            transition: color 0.2s;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
         }
 
         .nav-links a:hover {
             color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
         }
 
-        /* Banner Principal / Hero Hero Section */
+        /* Línea estética animada bajo los links */
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Banner Principal / Estética Premium */
         .hero {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            padding: 60px 20px;
+            position: relative;
+            padding: 90px 20px;
             text-align: center;
-            border-bottom: 1px solid #334155;
+            border-bottom: 1px solid var(--border-glow);
+            background: radial-gradient(circle, rgba(30, 41, 59, 0.4) 0%, transparent 80%);
         }
 
         .hero h1 {
-            font-size: 2.5rem;
-            color: var(--text-main);
-            margin-bottom: 10px;
+            font-size: 3.2rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 40%, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero p {
-            color: var(--primary);
+            color: var(--text-muted);
             font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto 20px auto;
+            max-width: 650px;
+            margin: 0 auto;
+            font-weight: 400;
         }
 
-        /* Contenedor Principal */
+        /* Contenedor Principal en Grid */
         .main-container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0 24px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 35px;
         }
 
-        @media (min-width: 768px) {
+        @media (min-width: 992px) {
             .main-container {
-                grid-template-columns: 2fr 1fr;
+                grid-template-columns: 2.2fr 1fr;
             }
         }
 
-        /* Tarjetas y Contenedores */
+        /* Títulos de sección ultra estéticos */
         .section-title {
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            letter-spacing: 0.5px;
         }
 
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 22px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Tarjetas con Efecto Cristal Elegante (Glassmorphism) */
         .card {
-            background-color: var(--bg-surface);
-            border-radius: 12px;
-            padding: 25px;
-            border: 1px solid #334155;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            margin-bottom: 25px;
+            background: var(--bg-surface);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            margin-bottom: 35px;
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
-        /* Módulos de Enlaces / Botonera Profesional */
+        .card:hover {
+            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.05);
+        }
+
+        /* Módulos de Enlaces Estilizados (Efecto Glow) */
         .link-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 15px;
+            gap: 20px;
         }
 
-        @media (min-width: 480px) {
+        @media (min-width: 576px) {
             .link-grid {
                 grid-template-columns: 1fr 1fr;
             }
         }
 
         .action-link {
-            background-color: var(--bg-card);
-            border: 1px solid #475569;
-            border-radius: 8px;
-            padding: 20px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 24px;
             text-decoration: none;
             color: var(--text-main);
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            transition: transform 0.2s, border-color 0.2s;
+            gap: 10px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.02);
         }
 
         .action-link:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            background: rgba(39, 53, 73, 0.8);
             border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px var(--primary-glow);
         }
 
         .action-link .icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            margin-bottom: 4px;
+            transition: transform 0.3s ease;
+        }
+
+        .action-link:hover .icon {
+            transform: scale(1.1);
         }
 
         .action-link .title {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: var(--primary);
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: #ffffff;
         }
 
         .action-link .desc {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--text-muted);
+            line-height: 1.5;
         }
 
-        /* Palabra del Día Interactiva */
+        /* Palabra del Día Estilo Panel de Control Premium */
         .devotional-box {
-            background-color: var(--bg-main);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 4px solid var(--accent);
-            margin-top: 15px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.4) 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2), inset 0 0 20px rgba(245, 158, 11, 0.02);
+            margin-top: 20px;
         }
 
         .devotional-meta {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--accent);
             text-transform: uppercase;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
         }
 
-        /* Reproductor de Audio Simulado */
+        /* Reproductor de Audio Moderno */
         .audio-player {
             display: flex;
             align-items: center;
             gap: 15px;
-            background: var(--bg-card);
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
+            background: rgba(15, 23, 42, 0.6);
+            padding: 18px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid var(--border-glow);
         }
 
         .play-btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), #0284c7);
             border: none;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #fff;
-            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 0 15px var(--primary-glow);
+            transition: transform 0.2s;
+        }
+
+        .play-btn:hover {
+            transform: scale(1.05);
         }
 
         .progress-bar {
             flex-grow: 1;
             height: 6px;
-            background: #475569;
+            background: rgba(255,255,255,0.1);
             border-radius: 3px;
-            position: relative;
         }
 
         .progress-fill {
-            width: 35%;
+            width: 40%;
             height: 100%;
             background: var(--primary);
             border-radius: 3px;
+            box-shadow: 0 0 10px var(--primary);
+        }
+
+        /* Lista de Horarios Estilizada */
+        .schedule-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .schedule-item {
+            background: rgba(255,255,255,0.01);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
+        }
+
+        .schedule-item.special {
+            border-left-color: var(--accent);
+        }
+
+        /* Botón de Refrescar Estilo Neon Outline */
+        button.refresh-btn {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+        }
+
+        button.refresh-btn:hover {
+            background-color: var(--primary);
+            color: #000000;
+            box-shadow: 0 0 15px var(--primary);
+            font-weight: bold;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             color: var(--text-muted);
             font-size: 0.9rem;
-            border-top: 1px solid #334155;
-            background-color: var(--bg-surface);
-        }
-
-        button.refresh-btn {
-            background-color: transparent;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        button.refresh-btn:hover {
-            background-color: var(--primary);
-            color: white;
+            border-top: 1px solid var(--border-glow);
+            background-color: rgba(11, 17, 30, 0.9);
+            margin-top: 40px;
         }
     </style>
 </head>
 <body>
 
-    <!-- Menú de Navegación -->
+    <!-- Menú de Navegación Espejo -->
     <nav class="navbar">
-        <div class="brand">⛪ Jesús Te Ama</div>
+        <div class="brand">⛪ Jesús Te <span>Ama</span></div>
         <div class="nav-links">
             <a href="#recursos">Recursos</a>
             <a href="#palabra">Devocional</a>
@@ -267,70 +405,69 @@
         </div>
     </nav>
 
-    <!-- Sección de Bienvenida Principal -->
+    <!-- Héroe Visual Superior -->
     <header class="hero">
         <h1>Iglesia Jesús Te Ama</h1>
-        <p>Conectados en fe, palabra y comunión. Bienvenidos a nuestra plataforma digital de recursos.</p>
+        <p>Un espacio digital diseñado para expandir el Reino, contener a la familia y edificar tu fe diaria.</p>
     </header>
 
-    <!-- Contenedor de Contenidos -->
+    <!-- Cuerpo de la Web -->
     <div class="main-container">
         
-        <!-- Columna Izquierda: Accesos y Plataformas -->
+        <!-- Bloque Principal Izquierdo -->
         <main>
             <div class="card" id="recursos">
-                <h2 class="section-title">🌐 Enlaces de Interés y Células</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Accedé de forma directa a todas nuestras actividades, transmisiones en vivo y redes de contención.</p>
+                <h2 class="section-title">Enlaces de Interés y Células</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem;">Accedé de forma directa a todas nuestras actividades semanales, transmisiones globales y canales de atención ministerial.</p>
                 
                 <div class="link-grid">
-                    <!-- REEMPLAZÁ LAS URL EN href="..." POR LAS TUYAS REALES -->
                     <a href="https://tu-url-de-celulas.com" target="_blank" class="action-link">
                         <span class="icon">👥</span>
                         <span class="title">Red de Células</span>
-                        <span class="desc">Encontrá tu grupo de hogar más cercano y sumate esta semana.</span>
+                        <span class="desc">Encontrá tu grupo de hogar más cercano. Comunidad, contención y palabra en casa.</span>
                     </a>
 
                     <a href="https://youtube.com/tu-canal-iglesia" target="_blank" class="action-link">
                         <span class="icon">📺</span>
                         <span class="title">Prédicas en Vivo</span>
-                        <span class="desc">Mirá nuestras reuniones generales de forma online por YouTube.</span>
+                        <span class="desc">Sintonizá nuestras reuniones generales en tiempo real y reviví los mensajes anteriores.</span>
                     </a>
 
                     <a href="https://tu-url-donaciones.com" target="_blank" class="action-link">
                         <span class="icon">❤️</span>
                         <span class="title">Diezmos y Ofrendas</span>
-                        <span class="desc">Plataforma segura para bendecir el ministerio de forma digital.</span>
+                        <span class="desc">Plataforma digital en línea para bendecir de forma práctica, transparente y segura.</span>
                     </a>
 
                     <a href="https://wa.me/tu-numero-whatsapp" target="_blank" class="action-link">
                         <span class="icon">🙏</span>
                         <span class="title">Peticiones de Oración</span>
-                        <span class="desc">Escribinos directamente. Nuestro equipo de intercesión está para vos.</span>
+                        <span class="desc">¿Necesitás apoyo espiritual? Escribinos y nuestro equipo pastoral se pondrá en contacto.</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Sección Dinámica de Palabra Diaria -->
+            <!-- Panel de Devocionales Dinámicos -->
             <div class="card" id="palabra">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                    <h2 class="section-title" style="margin: 0;">📖 Alimento para el Alma</h2>
-                    <button class="refresh-btn" onclick="cargarDevocionalNuevo()">Leer Otro</button>
+                    <h2 class="section-title" style="margin: 0;">Alimento para el Alma</h2>
+                    <button class="refresh-btn" onclick="cargarDevocionalNuevo()">Cambiar Palabra</button>
                 </div>
                 
                 <div class="devotional-box">
                     <div class="devotional-meta" id="dev-tema">FORTALEZA</div>
-                    <p id="dev-texto" style="font-size: 1.1rem; font-weight: 500; margin-bottom: 10px;">"Todo lo puedo en Cristo que me fortalece."</p>
-                    <span id="dev-cita" style="color: var(--primary); font-size: 0.9rem; font-weight: bold;">Filipenses 4:13</span>
+                    <p id="dev-texto" style="font-size: 1.2rem; font-weight: 600; margin-bottom: 12px; color: #ffffff;">"Todo lo puedo en Cristo que me fortalece."</p>
+                    <span id="dev-cita" style="color: var(--primary); font-size: 0.95rem; font-weight: bold; letter-spacing: 0.5px;">Filipenses 4:13</span>
                 </div>
             </div>
         </main>
 
-        <!-- Columna Derecha: Información de la Casa -->
+        <!-- Bloque Lateral Derecho -->
         <aside>
-            <!-- Último Reporte / Audio Prédica -->
+            <!-- Último Mensaje en Audio -->
             <div class="card">
-                <h2 class="section-title">🎙️ Último Mensaje</h2>
-                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">Escuchá el resumen de la palabra del último domingo:</p>
+                <h2 class="section-title">Último Mensaje</h2>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Escuchá el audio de edificación del último domingo de manera instantánea:</p>
                 <div class="audio-player">
                     <button class="play-btn" onclick="alert('Aquí se reproducirá el audio o podcast enlazado')">▶</button>
                     <div class="progress-bar">
@@ -339,36 +476,36 @@
                 </div>
             </div>
 
-            <!-- Horarios de Reuniones fijas -->
+            <!-- Horarios y Reuniones -->
             <div class="card" id="info">
-                <h2 class="section-title">⏰ Nuestras Reuniones</h2>
-                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
-                    <li style="border-bottom: 1px solid #334155; padding-bottom: 8px;">
-                        <strong style="color: var(--accent);">Domingos Generales:</strong><br>
-                        <span style="font-size: 0.9rem; color: var(--text-muted);">11:00 hs & 19:00 hs</span>
-                    </li>
-                    <li style="border-bottom: 1px solid #334155; padding-bottom: 8px;">
-                        <strong style="color: var(--accent);">Células en los Hogares:</strong><br>
-                        <span style="font-size: 0.9rem; color: var(--text-muted);">Miércoles y Jueves 20:00 hs</span>
-                    </li>
-                    <li>
-                        <strong style="color: var(--accent);">Reunión de Jóvenes:</strong><br>
-                        <span style="font-size: 0.9rem; color: var(--text-muted);">Sábados 18:30 hs</span>
-                    </li>
-                </ul>
+                <h2 class="section-title">Nuestras Reuniones</h2>
+                <div class="schedule-list">
+                    <div class="schedule-item">
+                        <strong style="color: var(--primary); font-size: 1rem;">Domingos Generales</strong><br>
+                        <span style="font-size: 0.9rem; color: var(--text-muted);">Reunión de Celebración: 11:00 hs y 19:00 hs</span>
+                    </div>
+                    <div class="schedule-item special">
+                        <strong style="color: var(--accent); font-size: 1rem;">Células en los Hogares</strong><br>
+                        <span style="font-size: 0.9rem; color: var(--text-muted);">Miércoles y Jueves en diferentes zonas: 20:00 hs</span>
+                    </div>
+                    <div class="schedule-item">
+                        <strong style="color: var(--primary); font-size: 1rem;">Reunión de Jóvenes</strong><br>
+                        <span style="font-size: 0.9rem; color: var(--text-muted);">Sábados de Conexión Juvenil: 18:30 hs</span>
+                    </div>
+                </div>
             </div>
         </aside>
 
     </div>
 
-    <!-- Pie de página corporativo -->
+    <!-- Pie de Página Institucional -->
     <footer class="footer">
         <p>© 2026 Iglesia Jesús Te Ama. Todos los derechos reservados.</p>
-        <p style="font-size: 0.8rem; margin-top: 5px; color: #64748b;">Diseñado para edificación y expansión del Reino.</p>
+        <p style="font-size: 0.8rem; margin-top: 6px; color: #475569; letter-spacing: 0.5px;">Conectando generaciones bajo el diseño del Reino.</p>
     </footer>
 
     <script>
-        // Base de datos de Devocionales completos
+        // Listado de devocionales dinámicos integrados
         const devocionales = [
             { tema: "FORTALEZA", texto: "Todo lo puedo en Cristo que me fortalece.", cita: "Filipenses 4:13" },
             { tema: "PAZ EN LA TORMENTA", texto: "Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestras mentes en Cristo Jesús.", cita: "Filipenses 4:7" },
