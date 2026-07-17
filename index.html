@@ -3,291 +3,385 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iglesia Jesús Te Ama</title>
+    <title>Iglesia Jesús Te Ama - Plataforma Oficial</title>
     <style>
         :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
+            --bg-main: #0f172a;
+            --bg-surface: #1e293b;
+            --bg-card: #273549;
             --primary: #38bdf8;
             --primary-hover: #0284c7;
-            --success: #2ecc71;
-            --error: #e74c3c;
+            --accent: #f59e0b;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
+            background-color: var(--bg-main);
             color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
+            line-height: 1.6;
+            padding-bottom: 60px;
         }
 
-        .container {
-            width: 100%;
-            max-width: 480px;
-            margin-top: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: var(--primary);
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .header p {
-            color: var(--text-muted);
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        .card {
-            background-color: var(--card-bg);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-            border: 1px solid #334155;
-            margin-bottom: 25px;
-        }
-
-        .card h2 {
-            font-size: 1.3rem;
-            margin-top: 0;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--primary);
-        }
-
-        button {
-            background-color: var(--primary);
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-            width: 100%;
-        }
-
-        button:hover {
-            background-color: var(--primary-hover);
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        .verse-display {
-            margin-top: 15px;
-            padding: 15px;
-            background-color: rgba(15, 23, 42, 0.6);
-            border-left: 4px solid var(--primary);
-            border-radius: 4px;
-            font-style: italic;
-            min-height: 45px;
-            line-height: 1.5;
-        }
-
-        /* Estilos del Juego de Trivia */
-        .question-text {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            font-weight: 500;
-            min-height: 50px;
-        }
-
-        .options-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .option-btn {
-            background-color: #334155;
-            color: var(--text-main);
-            border: 1px solid #475569;
-            text-align: left;
-            padding: 12px 15px;
-            font-weight: normal;
-        }
-
-        .option-btn:hover {
-            background-color: #475569;
-        }
-
-        .option-btn.correct {
-            background-color: var(--success) !important;
-            border-color: var(--success);
-        }
-
-        .option-btn.incorrect {
-            background-color: var(--error) !important;
-            border-color: var(--error);
-        }
-
-        .score-board {
-            margin-top: 15px;
+        /* Barra de Navegación Profesional */
+        .navbar {
+            background-color: var(--bg-surface);
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #334155;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.9rem;
+        }
+
+        .navbar .brand {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Banner Principal / Hero Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid #334155;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            color: var(--primary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Contenedor Principal */
+        .main-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .main-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        /* Tarjetas y Contenedores */
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card {
+            background-color: var(--bg-surface);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #334155;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
+        }
+
+        /* Módulos de Enlaces / Botonera Profesional */
+        .link-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 480px) {
+            .link-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .action-link {
+            background-color: var(--bg-card);
+            border: 1px solid #475569;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .action-link:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        .action-link .icon {
+            font-size: 1.8rem;
+        }
+
+        .action-link .title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+
+        .action-link .desc {
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        .next-btn {
-            background-color: #23c483;
+        /* Palabra del Día Interactiva */
+        .devotional-box {
+            background-color: var(--bg-main);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
             margin-top: 15px;
         }
-        .next-btn:hover {
-            background-color: #1b9e69;
+
+        .devotional-meta {
+            font-size: 0.8rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Reproductor de Audio Simulado */
+        .audio-player {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .play-btn {
+            background: var(--primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: #475569;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .progress-fill {
+            width: 35%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            background-color: var(--bg-surface);
+        }
+
+        button.refresh-btn {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        button.refresh-btn:hover {
+            background-color: var(--primary);
+            color: white;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Encabezado de la Iglesia -->
-        <div class="header">
-            <h1>Iglesia Jesús Te Ama</h1>
-            <p>Un lugar de fe, comunidad y crecimiento espiritual</p>
+    <!-- Menú de Navegación -->
+    <nav class="navbar">
+        <div class="brand">⛪ Jesús Te Ama</div>
+        <div class="nav-links">
+            <a href="#recursos">Recursos</a>
+            <a href="#palabra">Devocional</a>
+            <a href="#info">Horarios</a>
         </div>
+    </nav>
 
-        <!-- Sección 1: Palabra del Día Dinámica -->
-        <div class="card">
-            <h2>✨ Promesa del Día</h2>
-            <button onclick="generarPromesa()">Recibir una Palabra de Dios 📖</button>
-            <div id="verse-box" class="verse-display">Hacé clic arriba para inspirar tu día con las Escrituras.</div>
-        </div>
+    <!-- Sección de Bienvenida Principal -->
+    <header class="hero">
+        <h1>Iglesia Jesús Te Ama</h1>
+        <p>Conectados en fe, palabra y comunión. Bienvenidos a nuestra plataforma digital de recursos.</p>
+    </header>
 
-        <!-- Sección 2: Juego de Trivia Bíblica Interactivo -->
-        <div class="card">
-            <h2>🎮 Trivia Bíblica</h2>
-            <div id="question-box" class="question-text">Presioná "Iniciar Juego" para empezar a jugar.</div>
-            
-            <div id="options-container" class="options-grid">
-                <!-- Las opciones se generan dinámicamente con JS -->
+    <!-- Contenedor de Contenidos -->
+    <div class="main-container">
+        
+        <!-- Columna Izquierda: Accesos y Plataformas -->
+        <main>
+            <div class="card" id="recursos">
+                <h2 class="section-title">🌐 Enlaces de Interés y Células</h2>
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Accedé de forma directa a todas nuestras actividades, transmisiones en vivo y redes de contención.</p>
+                
+                <div class="link-grid">
+                    <!-- REEMPLAZÁ LAS URL EN href="..." POR LAS TUYAS REALES -->
+                    <a href="https://tu-url-de-celulas.com" target="_blank" class="action-link">
+                        <span class="icon">👥</span>
+                        <span class="title">Red de Células</span>
+                        <span class="desc">Encontrá tu grupo de hogar más cercano y sumate esta semana.</span>
+                    </a>
+
+                    <a href="https://youtube.com/tu-canal-iglesia" target="_blank" class="action-link">
+                        <span class="icon">📺</span>
+                        <span class="title">Prédicas en Vivo</span>
+                        <span class="desc">Mirá nuestras reuniones generales de forma online por YouTube.</span>
+                    </a>
+
+                    <a href="https://tu-url-donaciones.com" target="_blank" class="action-link">
+                        <span class="icon">❤️</span>
+                        <span class="title">Diezmos y Ofrendas</span>
+                        <span class="desc">Plataforma segura para bendecir el ministerio de forma digital.</span>
+                    </a>
+
+                    <a href="https://wa.me/tu-numero-whatsapp" target="_blank" class="action-link">
+                        <span class="icon">🙏</span>
+                        <span class="title">Peticiones de Oración</span>
+                        <span class="desc">Escribinos directamente. Nuestro equipo de intercesión está para vos.</span>
+                    </a>
+                </div>
             </div>
 
-            <button id="action-btn" class="next-btn" onclick="iniciarOSiguiente()">Iniciar Juego</button>
-
-            <div class="score-board">
-                <span id="score-text">Puntos: 0</span>
-                <span id="streak-text">Racha: 🔥 0</span>
+            <!-- Sección Dinámica de Palabra Diaria -->
+            <div class="card" id="palabra">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h2 class="section-title" style="margin: 0;">📖 Alimento para el Alma</h2>
+                    <button class="refresh-btn" onclick="cargarDevocionalNuevo()">Leer Otro</button>
+                </div>
+                
+                <div class="devotional-box">
+                    <div class="devotional-meta" id="dev-tema">FORTALEZA</div>
+                    <p id="dev-texto" style="font-size: 1.1rem; font-weight: 500; margin-bottom: 10px;">"Todo lo puedo en Cristo que me fortalece."</p>
+                    <span id="dev-cita" style="color: var(--primary); font-size: 0.9rem; font-weight: bold;">Filipenses 4:13</span>
+                </div>
             </div>
-        </div>
+        </main>
+
+        <!-- Columna Derecha: Información de la Casa -->
+        <aside>
+            <!-- Último Reporte / Audio Prédica -->
+            <div class="card">
+                <h2 class="section-title">🎙️ Último Mensaje</h2>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">Escuchá el resumen de la palabra del último domingo:</p>
+                <div class="audio-player">
+                    <button class="play-btn" onclick="alert('Aquí se reproducirá el audio o podcast enlazado')">▶</button>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horarios de Reuniones fijas -->
+            <div class="card" id="info">
+                <h2 class="section-title">⏰ Nuestras Reuniones</h2>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 12px;">
+                    <li style="border-bottom: 1px solid #334155; padding-bottom: 8px;">
+                        <strong style="color: var(--accent);">Domingos Generales:</strong><br>
+                        <span style="font-size: 0.9rem; color: var(--text-muted);">11:00 hs & 19:00 hs</span>
+                    </li>
+                    <li style="border-bottom: 1px solid #334155; padding-bottom: 8px;">
+                        <strong style="color: var(--accent);">Células en los Hogares:</strong><br>
+                        <span style="font-size: 0.9rem; color: var(--text-muted);">Miércoles y Jueves 20:00 hs</span>
+                    </li>
+                    <li>
+                        <strong style="color: var(--accent);">Reunión de Jóvenes:</strong><br>
+                        <span style="font-size: 0.9rem; color: var(--text-muted);">Sábados 18:30 hs</span>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
     </div>
 
+    <!-- Pie de página corporativo -->
+    <footer class="footer">
+        <p>© 2026 Iglesia Jesús Te Ama. Todos los derechos reservados.</p>
+        <p style="font-size: 0.8rem; margin-top: 5px; color: #64748b;">Diseñado para edificación y expansión del Reino.</p>
+    </footer>
+
     <script>
-        // --- BASE DE DATOS DE PROMESAS ---
-        const promesas = [
-            "Filipenses 4:13 - Todo lo puedo en Cristo que me fortalece.",
-            "Salmo 23:1 - Jehová es mi pastor; nada me faltará.",
-            "Josué 1:9 - Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes...",
-            "Jeremías 29:11 - Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal.",
-            "Romanos 8:28 - Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien.",
-            "Salmo 46:1 - Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones."
+        // Base de datos de Devocionales completos
+        const devocionales = [
+            { tema: "FORTALEZA", texto: "Todo lo puedo en Cristo que me fortalece.", cita: "Filipenses 4:13" },
+            { tema: "PAZ EN LA TORMENTA", texto: "Y la paz de Dios, que sobrepasa todo entendimiento, guardará vuestros corazones y vuestras mentes en Cristo Jesús.", cita: "Filipenses 4:7" },
+            { tema: "PROVISIÓN", texto: "Jehová es mi pastor; nada me faltará. En lugares de delicados pastos me hará descansar.", cita: "Salmo 23:1-2" },
+            { tema: "DIRECCIÓN DIVINA", texto: "Fíate de Jehová de todo tu corazón, y no te apoyes en tu propia prudencia. Reconócelo en todos tus caminos, y él enderezará tus veredas.", cita: "Proverbios 3:5-6" },
+            { tema: "CONFIANZA", texto: "No temas, porque yo estoy contigo; no desmayes, porque yo soy tu Dios que te esfuerzo; siempre te ayudaré, siempre te sustentaré con la diestra de mi justicia.", cita: "Isaías 41:10" }
         ];
 
-        // --- BASE DE DATOS DE TRIVIA ---
-        const preguntas = [
-            { q: "¿Quién venció a Goliat usando solo una honda y una piedra?", o: ["Saúl", "David", "Salomón", "Sansón"], c: "David" },
-            { q: "¿Cuál es el primer libro del Antiguo Testamento?", o: ["Éxodo", "Levítico", "Génesis", "Mateo"], c: "Génesis" },
-            { q: "¿Cuántos días y noches llovió sobre la tierra durante el diluvio?", o: ["7 días", "40 días", "12 días", "100 días"], c: "40 días" },
-            { q: "¿Qué apóstol negó a Jesús tres veces antes de que cantara el gallo?", o: ["Juan", "Judas", "Pedro", "Tomás"], c: "Pedro" },
-            { q: "¿Cuál es el libro más largo de la Biblia?", o: ["Génesis", "Isaías", "Salmos", "Apocalipsis"], c: "Salmos" }
-        ];
-
-        // Variables de control del estado del juego
-        let juegoIniciado = false;
-        let preguntaActual = null;
-        let puntos = 0;
-        let racha = 0;
-        let respondido = false;
-
-        // Función del Generador de Promesas
-        function generarPromesa() {
-            const index = Math.floor(Math.random() * promesas.length);
-            document.getElementById('verse-box').innerText = promesas[index];
-        }
-
-        // Funciones de la Trivia
-        function iniciarOSiguiente() {
-            const actionBtn = document.getElementById('action-btn');
-            
-            if (!juegoIniciado) {
-                juegoIniciado = true;
-                puntos = 0;
-                racha = 0;
-                document.getElementById('score-text').innerText = "Puntos: 0";
-                document.getElementById('streak-text').innerText = "Racha: 🔥 0";
-            }
-            
-            respondido = false;
-            actionBtn.style.display = 'none'; // Se oculta hasta que respondan
-            
-            // Elegir pregunta aleatoria
-            preguntaActual = preguntas[Math.floor(Math.random() * preguntas.length)];
-            
-            // Renderizar pregunta
-            document.getElementById('question-box').innerText = preguntaActual.q;
-            
-            // Renderizar botones de opciones
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            
-            preguntaActual.o.forEach(opcion => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opcion;
-                btn.onclick = () => verificarRespuesta(btn, opcion);
-                container.appendChild(btn);
-            });
-        }
-
-        function verificarRespuesta(btnSeleccionado, opcionSeleccionada) {
-            if (respondido) return; // Evita que responda dos veces la misma pregunta
-            respondido = true;
-
-            const botones = document.querySelectorAll('.option-btn');
-            const actionBtn = document.getElementById('action-btn');
-            
-            if (opcionSeleccionada === preguntaActual.c) {
-                btnSeleccionado.classList.add('correct');
-                puntos += 10;
-                racha++;
-                document.getElementById('score-text').innerText = `Puntos: ${puntos}`;
-                document.getElementById('streak-text').innerText = `Racha: 🔥 ${racha}`;
-            } else {
-                btnSeleccionado.classList.add('incorrect');
-                racha = 0;
-                document.getElementById('streak-text').innerText = `Racha: 🔥 ${racha}`;
-                
-                // Mostrar cuál era la correcta marcándola en verde
-                botones.forEach(b => {
-                    if (b.innerText === preguntaActual.c) {
-                        b.classList.add('correct');
-                    }
-                });
-            }
-
-            // Cambiar texto de control y volver a mostrar el botón de acción
-            actionBtn.innerText = "Siguiente Pregunta ➡️";
-            actionBtn.style.display = 'block';
+        function cargarDevocionalNuevo() {
+            const index = Math.floor(Math.random() * devocionales.length);
+            document.getElementById('dev-tema').innerText = devocionales[index].tema;
+            document.getElementById('dev-texto').innerText = `"${devocionales[index].texto}"`;
+            document.getElementById('dev-cita').innerText = devocionales[index].cita;
         }
     </script>
 </body>
