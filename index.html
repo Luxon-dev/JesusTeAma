@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iglesia Jesús Te Ama</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --primary: #38bdf8;
+            --primary-hover: #0284c7;
+            --success: #2ecc71;
+            --error: #e74c3c;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin-top: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border: 1px solid #334155;
+            margin-bottom: 25px;
+        }
+
+        .card h2 {
+            font-size: 1.3rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .verse-display {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: rgba(15, 23, 42, 0.6);
+            border-left: 4px solid var(--primary);
+            border-radius: 4px;
+            font-style: italic;
+            min-height: 45px;
+            line-height: 1.5;
+        }
+
+        /* Estilos del Juego de Trivia */
+        .question-text {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            font-weight: 500;
+            min-height: 50px;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background-color: #334155;
+            color: var(--text-main);
+            border: 1px solid #475569;
+            text-align: left;
+            padding: 12px 15px;
+            font-weight: normal;
+        }
+
+        .option-btn:hover {
+            background-color: #475569;
+        }
+
+        .option-btn.correct {
+            background-color: var(--success) !important;
+            border-color: var(--success);
+        }
+
+        .option-btn.incorrect {
+            background-color: var(--error) !important;
+            border-color: var(--error);
+        }
+
+        .score-board {
+            margin-top: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .next-btn {
+            background-color: #23c483;
+            margin-top: 15px;
+        }
+        .next-btn:hover {
+            background-color: #1b9e69;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Encabezado de la Iglesia -->
+        <div class="header">
+            <h1>Iglesia Jesús Te Ama</h1>
+            <p>Un lugar de fe, comunidad y crecimiento espiritual</p>
+        </div>
+
+        <!-- Sección 1: Palabra del Día Dinámica -->
+        <div class="card">
+            <h2>✨ Promesa del Día</h2>
+            <button onclick="generarPromesa()">Recibir una Palabra de Dios 📖</button>
+            <div id="verse-box" class="verse-display">Hacé clic arriba para inspirar tu día con las Escrituras.</div>
+        </div>
+
+        <!-- Sección 2: Juego de Trivia Bíblica Interactivo -->
+        <div class="card">
+            <h2>🎮 Trivia Bíblica</h2>
+            <div id="question-box" class="question-text">Presioná "Iniciar Juego" para empezar a jugar.</div>
+            
+            <div id="options-container" class="options-grid">
+                <!-- Las opciones se generan dinámicamente con JS -->
+            </div>
+
+            <button id="action-btn" class="next-btn" onclick="iniciarOSiguiente()">Iniciar Juego</button>
+
+            <div class="score-board">
+                <span id="score-text">Puntos: 0</span>
+                <span id="streak-text">Racha: 🔥 0</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DATOS DE PROMESAS ---
+        const promesas = [
+            "Filipenses 4:13 - Todo lo puedo en Cristo que me fortalece.",
+            "Salmo 23:1 - Jehová es mi pastor; nada me faltará.",
+            "Josué 1:9 - Mira que te mando que te esfuerces y seas valiente; no temas ni desmayes...",
+            "Jeremías 29:11 - Porque yo sé los pensamientos que tengo acerca de vosotros, dice Jehová, pensamientos de paz, y no de mal.",
+            "Romanos 8:28 - Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien.",
+            "Salmo 46:1 - Dios es nuestro amparo y fortaleza, nuestro pronto auxilio en las tribulaciones."
+        ];
+
+        // --- BASE DE DATOS DE TRIVIA ---
+        const preguntas = [
+            { q: "¿Quién venció a Goliat usando solo una honda y una piedra?", o: ["Saúl", "David", "Salomón", "Sansón"], c: "David" },
+            { q: "¿Cuál es el primer libro del Antiguo Testamento?", o: ["Éxodo", "Levítico", "Génesis", "Mateo"], c: "Génesis" },
+            { q: "¿Cuántos días y noches llovió sobre la tierra durante el diluvio?", o: ["7 días", "40 días", "12 días", "100 días"], c: "40 días" },
+            { q: "¿Qué apóstol negó a Jesús tres veces antes de que cantara el gallo?", o: ["Juan", "Judas", "Pedro", "Tomás"], c: "Pedro" },
+            { q: "¿Cuál es el libro más largo de la Biblia?", o: ["Génesis", "Isaías", "Salmos", "Apocalipsis"], c: "Salmos" }
+        ];
+
+        // Variables de control del estado del juego
+        let juegoIniciado = false;
+        let preguntaActual = null;
+        let puntos = 0;
+        let racha = 0;
+        let respondido = false;
+
+        // Función del Generador de Promesas
+        function generarPromesa() {
+            const index = Math.floor(Math.random() * promesas.length);
+            document.getElementById('verse-box').innerText = promesas[index];
+        }
+
+        // Funciones de la Trivia
+        function iniciarOSiguiente() {
+            const actionBtn = document.getElementById('action-btn');
+            
+            if (!juegoIniciado) {
+                juegoIniciado = true;
+                puntos = 0;
+                racha = 0;
+                document.getElementById('score-text').innerText = "Puntos: 0";
+                document.getElementById('streak-text').innerText = "Racha: 🔥 0";
+            }
+            
+            respondido = false;
+            actionBtn.style.display = 'none'; // Se oculta hasta que respondan
+            
+            // Elegir pregunta aleatoria
+            preguntaActual = preguntas[Math.floor(Math.random() * preguntas.length)];
+            
+            // Renderizar pregunta
+            document.getElementById('question-box').innerText = preguntaActual.q;
+            
+            // Renderizar botones de opciones
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            preguntaActual.o.forEach(opcion => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opcion;
+                btn.onclick = () => verificarRespuesta(btn, opcion);
+                container.appendChild(btn);
+            });
+        }
+
+        function verificarRespuesta(btnSeleccionado, opcionSeleccionada) {
+            if (respondido) return; // Evita que responda dos veces la misma pregunta
+            respondido = true;
+
+            const botones = document.querySelectorAll('.option-btn');
+            const actionBtn = document.getElementById('action-btn');
+            
+            if (opcionSeleccionada === preguntaActual.c) {
+                btnSeleccionado.classList.add('correct');
+                puntos += 10;
+                racha++;
+                document.getElementById('score-text').innerText = `Puntos: ${puntos}`;
+                document.getElementById('streak-text').innerText = `Racha: 🔥 ${racha}`;
+            } else {
+                btnSeleccionado.classList.add('incorrect');
+                racha = 0;
+                document.getElementById('streak-text').innerText = `Racha: 🔥 ${racha}`;
+                
+                // Mostrar cuál era la correcta marcándola en verde
+                botones.forEach(b => {
+                    if (b.innerText === preguntaActual.c) {
+                        b.classList.add('correct');
+                    }
+                });
+            }
+
+            // Cambiar texto de control y volver a mostrar el botón de acción
+            actionBtn.innerText = "Siguiente Pregunta ➡️";
+            actionBtn.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
